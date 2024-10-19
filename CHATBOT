@@ -1,0 +1,32 @@
+def chatbot():
+    user_input = input("User: ").lower()
+    
+    # Greeting
+    if user_input == "hi" or user_input == "hello":
+        print("Chatbot: Hey! How can I help you today?")
+    
+    # Basic Information
+    elif user_input == "who are you?":
+        print("Chatbot: I'm just a simple chatbot. What about you?")
+    
+    # Asking for name
+    elif user_input == "what is your name?":
+        print("Chatbot: My name is Chatty. Who are you?")
+    
+    # User's request for help
+    elif user_input == "I need help":
+        print("Chatbot: I can respond to questions, provide basic definitions, and more. What's up?")
+    
+    # Response to a user's story
+    elif user_input == "I tell you a funny story" or user_input == "i tell you a funny story":
+        print("Chatbot: Why was the math book sad? Because it had too many problems!")
+    
+    # Dealing with unknown requests
+    else:
+        print("Chatbot: Sorry. I didn't understand. Can you please rephrase or ask something else?")
+    
+    # Continue the conversation
+    next_question = input("Chatbot: It was nice chatting with you! Goodbye")
+    break
+
+chatbot()
