@@ -1,32 +1,43 @@
-def chatbot():
-    user_input = input("User: ").lower()
-    
-    # Greeting
-    if user_input == "hi" or user_input == "hello":
-        print("Chatbot: Hey! How can I help you today?")
-    
-    # Basic Information
-    elif user_input == "who are you?":
-        print("Chatbot: I'm just a simple chatbot. What about you?")
-    
-    # Asking for name
-    elif user_input == "what is your name?":
-        print("Chatbot: My name is Chatty. Who are you?")
-    
-    # User's request for help
-    elif user_input == "I need help":
-        print("Chatbot: I can respond to questions, provide basic definitions, and more. What's up?")
-    
-    # Response to a user's story
-    elif user_input == "I tell you a funny story" or user_input == "i tell you a funny story":
-        print("Chatbot: Why was the math book sad? Because it had too many problems!")
-    
-    # Dealing with unknown requests
-    else:
-        print("Chatbot: Sorry. I didn't understand. Can you please rephrase or ask something else?")
-    
-    # Continue the conversation
-    next_question = input("Chatbot: It was nice chatting with you! Goodbye")
-    break
+import re
+import random
 
-chatbot()
+class RuleBasedChatbot:
+    def __init__(self):
+        # Define a set of rules (patterns and responses)
+        self.rules = {
+            r"hi|hello|hey": ["Hello! How can I assist you today?", "Hi there! What can I do for you?", "Greetings! How may I help?"],
+            r"what is your name\??": ["I am a rule-based chatbot.", "You can call me Chatbot.", "I'm just a simple bot."],
+            r"how are you\??": ["I'm just a program, but thanks for asking!", "Doing well, how about you?", "I'm here to help you!"],
+            r"bye|goodbye": ["Goodbye! Have a great day!", "See you later!", "Take care!"],
+            r"help": ["You can ask me about my name, how I am, or just say hi!", "I'm here to assist you with your queries."],
+            r"what can you do\??": ["I can answer your questions and provide information.", "I can chat with you and help with basic queries."]
+        }
+        self.context = None  # To manage conversation context
+
+    def chatbot_response(self, user_input):
+        # Normalize user input to lower case
+        user_input = user_input.lower()
+        
+        # Check if the user input matches any rule using regex
+        for pattern, responses in self.rules.items():
+            if re.search(pattern, user_input):
+                return random.choice(responses)  # Return a random response from the matched pattern
+        
+        return "I'm sorry, I don't understand that. Can you rephrase?"
+
+    def main(self):
+        print("Welcome to the Enhanced Rule-Based Chatbot!")
+        print("Type 'bye' to exit.")
+        
+        while True:
+            user_input = input("You: ")
+            if user_input.lower() in ["bye", "goodbye"]:
+                print("Chatbot: Goodbye! Have a great day!")
+                break
+            
+            response = self.chatbot_response(user_input)
+            print(f"Chatbot: {response}")
+
+if __name__ == "__main__":
+    chatbot = RuleBasedChatbot()
+    chatbot.main()
